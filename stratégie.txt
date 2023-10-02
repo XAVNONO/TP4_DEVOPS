@@ -1,0 +1,38 @@
+>> Objectif : Chaîne de déploiement continue pour les applications en Python
+
+>> Outil utilisé : Jenkins Orchestration
+
+>> Détail du Pipeline:
+
+###################################################################################################
+pipeline {
+
+    //>>>>>Définition paramétres d'environnements et images
+            environment {
+
+    
+        agent any
+    
+    //>>>>>Récupérer l’image sur le docker hub
+        stages {
+            stage('Image docker hub') {
+    
+    //>>>>>Choix d'environnements : >DEV >TEST >PROD
+
+    //>>>>>DEV "Dans une VM sur le cloud => simple docker run"        
+            stage('Run appli') {
+    
+
+    //>>>>>TEST "Dans une VM => Docker compose pour test"
+            stage('test Docker Docker Scout') {
+
+    
+    //>>>>>PROD "Déploiement kubernetes"
+            stage('Run kubernetes') {
+
+            
+    //>>>>>Vérification "Test déploiement et rapport de test"
+             stage('Rapport de test') {
+
+
+###################################################################################################
