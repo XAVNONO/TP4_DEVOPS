@@ -1,0 +1,24 @@
+>>> Atelier : Gérer l'état Terraform
+
+#Vous pouvez répertorier les noms des comptes actifs à l'aide de cette commande :
+gcloud auth list
+
+#Pour répertorier les ID de projet, exécutez la commande suivante :
+gcloud config list project
+	
+#Pour récupérer l'ID de votre projet, exécutez la commande suivante :
+gcloud config list --format 'value(core.project)'
+
+terraform init
+terraform apply
+terraform show
+
+#Initialisez à nouveau votre backend, cette fois pour migrer automatiquement l'état.
+terraform init -migrate-state
+
+#Permet de détecter toute dérive par rapport au dernier état connu et de mettre à jour le fichier d'état.
+terraform refresh
+
+#Examinez les mises à jour :
+terraform show
+
