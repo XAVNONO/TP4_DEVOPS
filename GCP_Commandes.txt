@@ -9,6 +9,9 @@ gcloud config list project
 #Pour récupérer l'ID de votre projet, exécutez la commande suivante :
 gcloud config list --format 'value(core.project)'
 
+fichier de configuration :
+main.tf
+
 terraform init
 terraform apply
 terraform show
@@ -21,4 +24,25 @@ terraform refresh
 
 #Examinez les mises à jour :
 terraform show
+
+terraform apply
+terraform destroy
+
+docker run --name hashicorp-learn --detach --publish 8080:80 nginx:latest
+docker ps
+
+git clone https://github.com/hashicorp/learn-terraform-import.git
+cd learn-terraform-import
+terraform init
+
+terraform import docker_container.web $(docker inspect -f {{.ID}} hashicorp-learn)
+terraform show
+
+#Créer une configuration : Copiez l'état Terraform dans le fichier docker.tf :
+terraform show -no-color > docker.tf
+terraform plan
+
+terraform destroy
+docker ps --filter "name=hashicorp-learn"
+
 
