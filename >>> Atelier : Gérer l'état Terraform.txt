@@ -1,5 +1,3 @@
->>> Atelier : Gérer l'état Terraform
-
 #Vous pouvez répertorier les noms des comptes actifs à l'aide de cette commande :
 gcloud auth list
 
