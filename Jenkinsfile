@@ -9,14 +9,14 @@ pipeline {
 //>>>>> Récupérer l’image sur le docker hub <<<<<//
         stage('Push') {
             steps {
-                sh 'docker pull xavnono/mypythonapp'
+                sh 'docker pull xavnono/mypythonapp:latest'
             }
         }
 
 //>>>>> DEV "Dans une VM sur le cloud => simple docker run" <<<<<//
         stage('Build_DEV') {
             steps {
-                sh 'docker run -d --name mypythonapp-dev -p 8080:80 xavnono/mypythonapp:tagname'
+                sh 'docker run -d --name mypythonapp-dev -p 8080:80 xavnono/mypythonapp:latest'
             }
         }
 
