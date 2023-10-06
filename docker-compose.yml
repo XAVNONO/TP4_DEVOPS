@@ -5,7 +5,7 @@ services:
     ports:
       - "8089:8089"
   scout:
-    image: scoutapp/docker-scout
+    image: scoutapp/scoutapm
     depends_on:
       - mypythonapp
     command: "scout mypythonapp:8089"
