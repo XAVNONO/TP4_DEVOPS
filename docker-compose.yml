@@ -8,4 +8,4 @@ services:
     image: scoutapp/scoutapm
     depends_on:
       - mypythonapp
-    command: "scout tp4-poei_mypythonapp_1:8089"
+    command: "scout mypythonapp:8089"
