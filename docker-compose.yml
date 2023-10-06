@@ -1,0 +1,11 @@
+version: '3'
+services:
+  mypythonapp:
+    image: xavnono/mypythonapp:tagname
+    ports:
+      - "8080:80"
+  scout:
+    image: scoutapp/docker-scout
+    depends_on:
+      - mypythonapp
+    command: "scout mypythonapp:80"
