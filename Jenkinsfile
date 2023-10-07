@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh 'docker-compose up -d'
                 sleep 30
-                sh 'docker-compose exec scout scout mypythonapp:8089'
+                sh 'docker-compose exec scout scout tp4-poei_mypythonapp_1:8089'
                 sh 'docker-compose down'
             }
         }
