@@ -8,4 +8,4 @@ services:
     image: scoutapp/scoutapm
     depends_on:
       - mypythonapp
-    command: "scout mypythonapp:8089"
+    command: "docker scout mypythonapp:8089"
