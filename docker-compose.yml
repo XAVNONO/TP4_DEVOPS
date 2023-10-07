@@ -8,4 +8,4 @@ services:
     image: docker/scout-cli:latest
     depends_on:
       - mypythonapp
-    command: "docker scout mypythonapp:8089"
+    command: "docker scout tp4-poei_mypythonapp_1:8089"
