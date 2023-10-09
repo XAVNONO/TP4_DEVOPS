@@ -3,9 +3,9 @@ pipeline {
 
   parameters {
       choice(name: 'ENVIRONMENT', choices: ['dev', 'test', 'prod'], description: 'Choose environment')
-      IMAGE_TAG = 'xavnono/python_app'
-      DOCKER_HUB_USER = credentials('xavnono')
-      DOCKER_HUB_PAT = credentials('Xavi0501!')
+      IMAGE_TAG = xavnono/python_app
+      DOCKER_HUB_USER = credentials(xavnono)
+      DOCKER_HUB_PAT = credentials(Xavi0501!)
   }
  
   stages {
