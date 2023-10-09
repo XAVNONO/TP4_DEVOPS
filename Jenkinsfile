@@ -3,6 +3,9 @@ pipeline {
 
   parameters {
       choice(name: 'ENVIRONMENT', choices: ['dev', 'test', 'prod'], description: 'Choose environment')
+        IMAGE_TAG = 'xavnono/python_app' // Remplacez par le tag de votre image
+        DOCKER_HUB_USER = credentials('xavnono')
+        DOCKER_HUB_PAT = credentials('dckr_pat_4J2oyGlyWzsg8HafBxz4YnTOqhQ')
   }
  
   stages {
@@ -28,15 +31,28 @@ pipeline {
       stage('Scout_TEST') {
         when {
             expression {params.ENVIRONMENT == 'test'}
-        }
+    //     }
+    //       steps {
+    //           sh 'docker-compose up -d'
+    //           sleep 30
+    //           sh 'docker-compose exec scout scout python_app:8888'
+    //           sh 'docker-compose down'
+    //       }
+    //   }
+
           steps {
-              sh 'docker-compose up -d'
-              sleep 30
-              sh 'docker-compose exec scout scout python_app:8888'
-              sh 'docker-compose down'
-          }
-      }
-      
+                // Install Docker Scout
+                sh 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin'
+                
+                // Log into Docker Hub
+                sh 'echo $DOCKER_HUB_PAT | docker login -u $DOCKER_HUB_USER --password-stdin'
+
+                // Analyze and fail on critical or high vulnerabilities
+                sh 'docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
+            }
+        }
+
+
 //>>>>> PROD "Déploiement kubernetes" <<<<<//        
       stage('Deploy_PROD') {
         when {
