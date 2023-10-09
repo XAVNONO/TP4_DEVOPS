@@ -16,7 +16,7 @@ pipeline {
 //>>>>> DEV "Dans une VM sur le cloud => simple docker run" <<<<<//
       stage('Build_DEV') {
           steps {
-              sh 'docker run -d --name python_app_dev -p 8000:8888 xavnono/python_app:latest'
+              sh 'docker container run -p 8888:8000 --name python_app xavnono/python_app:latest'
           }
       }
 
