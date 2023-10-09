@@ -32,7 +32,7 @@ pipeline {
           steps {
               sh 'docker-compose up -d'
               sleep 30
-              sh 'docker-compose exec scout scout python_app:8088'
+              sh 'docker-compose exec scout scout python_app_test:8888'
               sh 'docker-compose down'
           }
       }
