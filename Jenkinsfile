@@ -7,7 +7,7 @@ pipeline {
   stages {
 
 //>>>>> Récupérer l’image sur le docker hub <<<<<//
-      stage('Push') {
+      stage('Pull') {
           steps {
               sh 'docker pull xavnono/python_app:latest'
           }
