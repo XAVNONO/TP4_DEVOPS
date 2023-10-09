@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:8888"
   scout_test:
-    image: docker/scout-cli:latest
+    image: scout-cli:latest
     depends_on:
       - python_app_test
     command: "scout python_app_test:8888"
