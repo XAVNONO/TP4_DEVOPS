@@ -34,7 +34,7 @@ pipeline {
       stage('Scout_TEST') {
         when {
             expression {params.ENVIRONMENT == 'test'}
-    //     }
+        }
     //       steps {
     //           sh 'docker-compose up -d'
     //           sleep 30
@@ -43,7 +43,7 @@ pipeline {
     //       }
     //   }
 
-             steps {
+          steps {
                 // Install Docker Scout
                 sh 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin'
                 
@@ -68,5 +68,4 @@ pipeline {
       }
 
   }
-}
 }
