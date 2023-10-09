@@ -43,8 +43,6 @@ pipeline {
     //       }
     //   }
 
-
-      stage('Analyze image') {
           steps {
               // Install Docker Scout
               sh 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin'
@@ -70,5 +68,4 @@ pipeline {
       }
 
   }
-}
 }
