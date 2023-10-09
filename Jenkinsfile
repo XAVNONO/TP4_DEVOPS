@@ -1,7 +1,8 @@
 pipeline {
   agent any
-  options {
-      skipStagesAfterUnstable()
+
+  parameters {
+      choice(name: 'ENVIRONMENT', choices: ['dev', 'test', 'prod'], description: 'Choose environment')
   }
  
   stages {
@@ -15,6 +16,9 @@ pipeline {
 
 //>>>>> DEV "Dans une VM sur le cloud => simple docker run" <<<<<//
       stage('RUN_DEV') {
+        when {
+            expression {params.ENVIRONMENT == 'dev'}
+        }
           steps {
               sh 'docker container run -d -p 8888:8000 --name python_app_dev xavnono/python_app:latest'
           }
@@ -22,6 +26,9 @@ pipeline {
 
 //>>>>> TEST "Dans une VM => Docker compose pour test" <<<<<//        
       stage('Scout_TEST') {
+        when {
+            expression {params.ENVIRONMENT == 'test'}
+        }
           steps {
               sh 'docker-compose up -d'
               sleep 30
@@ -32,6 +39,9 @@ pipeline {
       
 //>>>>> PROD "Déploiement kubernetes" <<<<<//        
       stage('Deploy_PROD') {
+        when {
+            expression {params.ENVIRONMENT == 'prod'}
+        }
           steps {
               sh 'kubectl apply -f deployment.yaml'
               sh 'kubectl rollout status deployment/python_app_deployment'
