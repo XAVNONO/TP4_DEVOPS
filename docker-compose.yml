@@ -1,15 +1,11 @@
 version: '3'
 services:
-  mypythonapp:
-    image: xavnono/mypythonapp:latest
+  python_app:
+    image: xavnono/python_app:latest
     ports:
-      - "8089:8089"
-  scout:
-    image: docker/scout-cli:latest
-    command: bash -c 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh |
-             sh -s -- -b /usr/local/bin && echo $DOCKER_HUB_PAT |
-             docker login -u $DOCKER_HUB_USER --password-stdin && docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
-    environment:
-      - DOCKER_HUB_PAT=dckr_pat_4J2oyGlyWzsg8HafBxz4YnTOqhQ
-      - DOCKER_HUB_USER=xavnono
-      - IMAGE_TAG=xavnono/mypythonapp:latest
+      - "8000:8888"
+  scout_test:
+    image: scoutapp/docker-scout
+    depends_on:
+      - python_app
+    command: "scout python_app:8888"

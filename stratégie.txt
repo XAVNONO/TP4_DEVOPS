@@ -16,14 +16,14 @@ pipeline {
 //>>>>> Récupérer l’image sur le docker hub <<<<<//
       stage('Push') {
           steps {
-              sh 'docker pull xavnono/mypythonapp:latest'
+              sh 'docker pull xavnono/python_app:latest'
           }
       }
 
 //>>>>> DEV "Dans une VM sur le cloud => simple docker run" <<<<<//
       stage('Build_DEV') {
           steps {
-              sh 'docker run -d --name mypythonapp-dev -p 8088:8088 xavnono/mypythonapp:latest'
+              sh 'docker run -d --name python_app_dev -p 8088:8088 xavnono/python_app:latest'
           }
       }
 
@@ -32,7 +32,7 @@ pipeline {
           steps {
               sh 'docker-compose up -d'
               sleep 30
-              sh 'docker-compose exec scout scout mypythonapp:8088'
+              sh 'docker-compose exec scout scout python_app:8088'
               sh 'docker-compose down'
           }
       }
@@ -41,7 +41,7 @@ pipeline {
       stage('Deploy_PROD') {
           steps {
               sh 'kubectl apply -f deployment.yaml'
-              sh 'kubectl rollout status deployment/mypythonapp-deployment'
+              sh 'kubectl rollout status deployment/python_app_deployment'
           }
       }
 
@@ -53,15 +53,15 @@ docker-compose.yml
 '''
 version: '3'
 services:
-  mypythonapp:
-    image: xavnono/mypythonapp:tagname
+  python_app:
+    image: xavnono/python_app:latest
     ports:
-      - "8080:80"
-  scout:
+      - "8000:8888"
+  scout_test:
     image: scoutapp/docker-scout
     depends_on:
-      - mypythonapp
-    command: "scout mypythonapp:80"
+      - python_app
+    command: "scout python_app:8888"
 '''
 ###################################################################################################
 deployment.yaml
@@ -69,22 +69,22 @@ deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mypythonapp-deployment
+  name: python_app_deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: mypythonapp
+      app: python_app
   template:
     metadata:
       labels:
-        app: mypythonapp
+        app: python_app
     spec:
       containers:
-      - name: mypythonapp
-        image: xavnono/mypythonapp:tagname
+      - name: python_app
+        image: xavnono/python_app:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8900
 '''
 ###################################################################################################
 

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mypythonapp-deployment
+  name: python_app_deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: mypythonapp
+      app: python_app
   template:
     metadata:
       labels:
-        app: mypythonapp
+        app: python_app
     spec:
       containers:
-      - name: mypythonapp
-        image: xavnono/mypythonapp:tagname
+      - name: python_app
+        image: xavnono/python_app:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8900
