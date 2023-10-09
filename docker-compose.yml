@@ -1,11 +1,11 @@
 version: '3'
 services:
-  python_app:
+  python_app_test:
     image: xavnono/python_app:latest
     ports:
       - "8000:8888"
   scout_test:
-    image: scoutapp/docker-scout
+    image: docker/scout-cli:latest
     depends_on:
-      - python_app
-    command: "scout python_app:8888"
+      - python_app_test
+    command: "scout python_app_test:8888"
