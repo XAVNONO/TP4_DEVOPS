@@ -31,29 +31,42 @@ pipeline {
       }
 
 //>>>>> TEST "Dans une VM => Docker compose pour test" <<<<<//        
-      stage('Scout_TEST') {
+      stage('Vulnérability_TEST') {
         when {
             expression {params.ENVIRONMENT == 'test'}
-        }
-    //       steps {
-    //           sh 'docker-compose up -d'
-    //           sleep 30
-    //           sh 'docker-compose exec scout scout python_app:8888'
-    //           sh 'docker-compose down'
-    //       }
-    //   }
-
+             }
+           
           steps {
-              // Install Docker Scout
-              sh 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin'
-        
-              // Log into Docker Hub
-              sh 'echo $DOCKER_HUB_PAT | docker login -u $DOCKER_HUB_USER --password-stdin'
-
-              // Analyze and fail on critical or high vulnerabilities
-              sh 'docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
+                // Build an image for scanning
+                sh 'echo "FROM xavnono/python_app:latest" > Dockerfile'
+                sh 'docker build --no-cache -t test/test-image:0.1 .'
+                }
+        }
+      stage('Scan') {
+          steps {
+                // Scan the image
+                prismaCloudScanImage ca: '',
+                cert: '',
+                dockerAddress: 'unix:///var/run/docker.sock',
+                image: 'test/test-image*',
+                key: '',
+                logLevel: 'info',
+                podmanPath: '',
+                // The project field below is only applicable if you are using Prisma Cloud Compute Edition and have set up projects (multiple consoles) on Prisma Cloud.
+                project: '',
+                resultsFile: 'prisma-cloud-scan-results.json',
+                ignoreImageBuildTime:true
+                }
+        }
+    }
+    post {
+        always {
+            // The post section lets you run the publish step regardless of the scan results
+            prismaCloudPublish resultsFilePattern: 'prisma-cloud-scan-results.json'
+               }
     }
 }
+
 
 
 //>>>>> PROD "Déploiement kubernetes" <<<<<//        
