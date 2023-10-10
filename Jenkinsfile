@@ -79,6 +79,3 @@ pipeline {
               sh 'kubectl rollout status deployment/python_app_deployment'
           }
       }
-
-  }
-}
