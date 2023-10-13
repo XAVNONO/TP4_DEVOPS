@@ -38,7 +38,7 @@ pipeline {
         }
           steps {
                 // Install Docker Scout
-              sh 'docker-compose up -it'
+              sh 'docker-compose up -it --always-recreate-deps'
             //   sh './run_tests'
               sh 'docker-compose down'
             }
