@@ -39,7 +39,6 @@ pipeline {
           steps {
                 // Install Docker Scout
               sh 'docker-compose up -d'
-              sh 'docker-compose down'
             }
         }
 
