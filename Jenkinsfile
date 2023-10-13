@@ -56,4 +56,3 @@ pipeline {
               sh 'kubectl apply -f deployment.yaml'
               sh 'kubectl rollout status deployment/python_app_deployment'
           }
-      }
