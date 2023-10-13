@@ -1,11 +1,13 @@
 version: '3'
+
 services:
-  python_app_test:
-    image: xavnono/python_app:latest
+  python_app:
+    image: xavnono/python_app
     ports:
       - "8000:8888"
-  scout_test:
-    image: scout-cli:latest
-    depends_on:
-      - python_app_test
-    command: "scout python_app_test:8888"
+  scout-cli:
+    image: docker/scout-cli
+    environment:
+      - DOCKER_SCOUT_HUB_USER=xavnono
+      - DOCKER_SCOUT_HUB_PASSWORD=dckr_pat_4J2oyGlyWzsg8HafBxz4YnTOqhQ
+    command: cves xavnono/python_app --exit-code --only-severity critical,high
