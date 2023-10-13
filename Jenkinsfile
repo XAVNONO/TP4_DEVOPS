@@ -26,6 +26,7 @@ pipeline {
             expression {params.ENVIRONMENT == 'dev'}
         }
           steps {
+              sh 'docker pull xavnono/python_app:latest'
               sh 'docker container run -d -p 8888:8000 --name python_app_dev xavnono/python_app:latest'
           }
       }
