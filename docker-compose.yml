@@ -4,7 +4,7 @@ services:
   python_app:
     image: xavnono/python_app
     ports:
-      - "8000:8888"
+      - "8888:8000"
   scout-cli:
     image: docker/scout-cli
     environment:
