@@ -14,11 +14,11 @@ pipeline {
   stages {
 
 //>>>>> Récupérer l’image sur le docker hub <<<<<//
-      stage('Hub_Docker_Pull') {
-          steps {
-              sh 'docker pull xavnono/python_app:latest'
-          }
-      }
+    //   stage('Hub_Docker_Pull') {
+    //       steps {
+    //           sh 'docker pull xavnono/python_app:latest'
+    //       }
+    //   }
 
 //>>>>> DEV "Dans une VM sur le cloud => simple docker run" <<<<<//
       stage('RUN_DEV') {
@@ -38,7 +38,8 @@ pipeline {
         }
           steps {
                 // Install Docker Scout
-              sh 'docker-compose up'
+              sh 'docker-compose up -d'
+              sh 'docker-compose down'
             }
         }
 
