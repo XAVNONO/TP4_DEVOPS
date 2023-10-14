@@ -6,9 +6,9 @@ pipeline {
   }
  
   environment {
-      IMAGE_TAG = ${env.PYTHONAPP}
-      DOCKER_HUB_USER = ${env.MONID}
-      DOCKER_HUB_PAT = ${env.TOKHUBDOCKER}
+      IMAGE_TAG = "${env.PYTHONAPP}"
+      DOCKER_HUB_USER = "${env.MONID}"
+      DOCKER_HUB_PAT = "${env.TOKHUBDOCKER}"
   }
 
   stages {
