@@ -39,11 +39,6 @@ pipeline {
           steps {
               // lancement containeur Docker Scout
               sh 'docker-compose up -d --force-recreate'
-              // Authentification à Docker Hub
-              sh 'echo $DOCKER_HUB_PAT | docker login -u $DOCKER_HUB_USER --password-stdin'
-              // Lancement test de vulnérabilité critique et haute
-              sh 'docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
-              // Nettoyage
               sh 'docker-compose down'
             }
         }
