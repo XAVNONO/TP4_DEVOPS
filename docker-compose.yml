@@ -3,3 +3,5 @@ version: '3'
 services:
   scout-cli:
     image: docker/scout-cli
+    ports: 
+      - "11434:11434"
