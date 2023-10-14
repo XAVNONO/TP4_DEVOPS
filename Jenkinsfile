@@ -26,8 +26,14 @@ pipeline {
             expression {params.ENVIRONMENT == 'dev'}
         }
           steps {
+              // Récupération de l'image applicative provenant de Hub Docker 
               sh 'docker pull xavnono/python_app:latest'
+              // Lancement du containeur applicatif
               sh 'docker container run -d -p 8888:8000 --name python_app_dev xavnono/python_app:latest'
+              // Check état containeur "exited"
+              sh 'while [ "$(docker inspect -f "{{.State.Status}}" python_app_dev)" != "exited" ]; do sleep 1; done'
+              // Nettoyage containeur
+              sh 'docker rm python_app_dev'
           }
       }
 
@@ -37,9 +43,9 @@ pipeline {
             expression {params.ENVIRONMENT == 'test'}
         }
           steps {
-              // lancement containeur Docker Scout
+              // Lancement containeur Docker Scout
               sh 'docker-compose up'
-              // Check conteneur tp4-poei_scout-cli_1 soit en état "exited"
+              // Check état containeur "exited"
               sh 'while [ "$(docker inspect -f "{{.State.Status}}" tp4-poei_scout-cli_1)" != "exited" ]; do sleep 1; done'
               // Nettoyage containeur
               sh 'docker-compose down'
