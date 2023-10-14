@@ -13,13 +13,6 @@ pipeline {
 
   stages {
 
-//>>>>> Récupérer l’image sur le docker hub <<<<<//
-    //   stage('Hub_Docker_Pull') {
-    //       steps {
-    //           sh 'docker pull xavnono/python_app:latest'
-    //       }
-    //   }
-
 //>>>>> DEV "Dans une VM sur le cloud => simple docker run" <<<<<//
       stage('RUN_DEV') {
         when {
@@ -34,8 +27,8 @@ pipeline {
               sh 'while [ "$(docker inspect -f "{{.State.Status}}" python_app_dev)" != "exited" ]; do sleep 1; done'
               // Nettoyage containeur
               sh 'docker rm python_app_dev'
+            }
           }
-      }
 
 //>>>>> TEST "Dans une VM => Docker compose pour test" <<<<<//        
       stage('Test_Scout') {
@@ -61,6 +54,6 @@ pipeline {
               sh 'kubectl apply -f deployment.yaml'
               sh 'kubectl rollout status deployment/python_app_deployment'
           }
+        }
       }
-  }
-}
+    }
