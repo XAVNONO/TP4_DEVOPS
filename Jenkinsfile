@@ -40,7 +40,7 @@ pipeline {
               // lancement containeur Docker Scout
               sh 'docker-compose up -d'
               // Nettoyage containeur
-              sh 'docker-compose down'
+              // sh 'docker-compose down'
  
     }
   }
