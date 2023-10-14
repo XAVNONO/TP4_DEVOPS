@@ -5,6 +5,7 @@ services:
     image: docker/scout-cli
     ports: 
       - "11434:11434"
-    command : >
-      sh -c'echo dckr_pat_4J2oyGlyWzsg8HafBxz4YnTOqhQ | docker login -u xavnono --password-stdin &&
-        docker-scout cves xavnono/python_app --exit-code --only-severity critical,high'
+    command: >
+      sh -c '
+        echo $DOCKER_HUB_PAT | docker login -u $DOCKER_HUB_USER --password-stdin &&
+        docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
