@@ -6,9 +6,9 @@ pipeline {
   }
  
   environment {
-      IMAGE_TAG = "xavnono/python_app"
-      DOCKER_HUB_USER = "xavnono"
-      DOCKER_HUB_PAT = "dckr_pat_4J2oyGlyWzsg8HafBxz4YnTOqhQ"
+      IMAGE_TAG = ${env.PYTHONAPP}
+      DOCKER_HUB_USER = ${env.MONID}
+      DOCKER_HUB_PAT = ${env.TOKHUBDOCKER}
   }
 
   stages {
