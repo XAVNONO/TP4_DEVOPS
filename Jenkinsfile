@@ -38,7 +38,7 @@ pipeline {
         }
           steps {
               // lancement containeur Docker Scout
-              sh 'docker-compose up -d'
+              sh 'docker-compose up'
               // Nettoyage containeur
               // sh 'docker-compose down'
  
