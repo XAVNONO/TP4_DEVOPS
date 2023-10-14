@@ -43,7 +43,7 @@ pipeline {
               sh 'echo $DOCKER_HUB_PAT | docker login -u $DOCKER_HUB_USER --password-stdin'
               // Lancement test de vulnérabilité critique et haute
               sh 'docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
-              // Suppresion du conteneur de test
+              // Nettoyage
               sh 'docker-compose down'
             }
         }
