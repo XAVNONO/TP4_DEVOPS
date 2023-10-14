@@ -39,7 +39,7 @@ pipeline {
           steps {
               // lancement containeur Docker Scout
               sh 'docker-compose up -d --force-recreate'
-              sh 'docker-compose down'
+              // sh 'docker-compose down'
             }
         }
 
