@@ -39,8 +39,10 @@ pipeline {
           steps {
               // lancement containeur Docker Scout
               sh 'docker-compose up'
+              // Check conteneur tp4-poei_scout-cli_1 soit en état "exited"
+              sh 'while [ "$(docker inspect -f "{{.State.Status}}" tp4-poei_scout-cli_1)" != "exited" ]; do sleep 1; done'
               // Nettoyage containeur
-              // sh 'docker-compose down'
+              sh 'docker-compose down'
  
     }
   }
