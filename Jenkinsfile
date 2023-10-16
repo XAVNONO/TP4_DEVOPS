@@ -61,7 +61,7 @@ pipeline {
               //       --docker-email=${DOCKER_HUB_MAIL}
               //    '''
               sh '''
-                    kubectl create secret docker-registry REGCRED --docker-username=${DOCKER_HUB_USER}
+                    kubectl create secret docker-registry REGCRED --docker-username=${DOCKER_HUB_USER} /
                     --docker-password=${DOCKER_HUB_PAT} --docker-email=${DOCKER_HUB_MAIL} --docker-server=${DOCKER_REGISTRY}
                  '''
             
