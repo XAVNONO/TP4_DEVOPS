@@ -10,6 +10,7 @@ pipeline {
       DOCKER_HUB_USER = "${env.MONID}"
       DOCKER_HUB_PAT = "${env.TOKHUBDOCKER}"
       DOCKER_HUB_MAIL = "${env.MONMAIL}"
+      DOCKER_REGISTRY = "${env.MONREGISTRE}"
   }
 
   stages {
@@ -61,7 +62,7 @@ pipeline {
               //    '''
               sh '''
                     kubectl create secret docker-registry REGCRED --docker-username=${DOCKER_HUB_USER}
-                    --docker-password=${DOCKER_HUB_PAT} --docker-email=${DOCKER_HUB_MAIL}
+                    --docker-password=${DOCKER_HUB_PAT} --docker-email=${DOCKER_HUB_MAIL} --docker-server=${DOCKER_REGISTRY}
                  '''
             
               // Déploiement en réplica 3
