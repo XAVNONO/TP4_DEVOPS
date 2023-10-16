@@ -1,16 +1,16 @@
 apiVersion: apps/v1            # Version API Kubernetes
 kind: Deployment
 metadata:
-  name: python_app_deployment    # Nom du déploiement
+  name: python-app-deployment    # Nom du déploiement
 spec:                        # spécification du déploiement
   replicas: 3                    # Nombres de répliques du déploiement
   selector:
     matchLabels:
-      app: python_app            # Etiquettes et valeur qui doivent être associés aux PODs de ce déploiement
+      app: python-app            # Etiquettes et valeur qui doivent être associés aux PODs de ce déploiement
   template:
     metadata:
       labels:
-        app: python_app          # Etiquettes et valeur associés aux PODs générés
+        app: python-app          # Etiquettes et valeur associés aux PODs générés
     spec:                    # spécification du POD
       imagePullSecrets:
       - name: regcred        # Mes credentials pour le HubDocker
