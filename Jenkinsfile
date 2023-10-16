@@ -54,7 +54,7 @@ pipeline {
           steps {
               // création de secret sur kubernetes
               sh '''
-                  kubectl create secret docker-registry REGCRED --docker-server=docker.io /
+                  kubectl create secret docker-registry REGCRED --docker-server=https://hub.docker.com/repository/docker/xavnono /
                     --docker-username=${DOCKER_HUB_USER} /
                     --docker-password=${DOCKER_HUB_PAT} /
                     --docker-email=${DOCKER_HUB_MAIL}
