@@ -15,8 +15,8 @@ spec:                        # spécification du déploiement
       imagePullSecrets:
       - name: regcred        # Mes credentials pour le HubDocker
       containers:
-      - name: python_app                    # Nom du conteneur
-        image: xavnono/python_app:latest    # Image Docker utilisée
+      - name: python-app                    # Nom du conteneur
+        image: xavnono/python-app:latest    # Image Docker utilisée
         ports:
         - containerPort: 8900              # Port d'écoute du conteneur
 
