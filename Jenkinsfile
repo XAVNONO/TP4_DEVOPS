@@ -53,6 +53,8 @@ pipeline {
             expression {params.ENVIRONMENT == 'prod'}
         }
           steps {
+              // Lancement de minikube
+              sh 'minikube start'
               // création de secret sur kubernetes
               sh '''
                   kubectl create secret docker-registry regcred \
