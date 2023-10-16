@@ -18,4 +18,4 @@ spec:                        # spécification du déploiement
         ports:
         - containerPort: 8900              # Port d'écoute du conteneur
         imagePullSecrets:
-        - name: regcred
+        - name: REGCRED
