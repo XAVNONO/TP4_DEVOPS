@@ -55,7 +55,7 @@ pipeline {
           steps {
               // création de secret sur kubernetes
               sh '''
-                  kubectl create secret docker-registry REGCRED \
+                  kubectl create secret docker-registry regcred \
                     --docker-server=${DOCKER_REGISTRY} \
                     --docker-username=${DOCKER_HUB_USER} \
                     --docker-password=${DOCKER_HUB_PAT} \
