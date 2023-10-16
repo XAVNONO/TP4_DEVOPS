@@ -18,9 +18,9 @@ spec:                        # spécification du déploiement
         ports:
         - containerPort: 8900              # Port d'écoute du conteneur
         env:
-        - name: PYTHONAPP
+        - name: IMAGE_TAG
           value: "$(pythonapp)"
-        - name: MONID
-          value: "$(monid)"
-        - name: TOKHUBDOCKER
-          value: "$(tokhubdocker)"
+        - name: DOCKER_HUB_USER
+          value: "${env.MONID}"
+        - name: DOCKER_HUB_PAT
+          value: "${env.TOKHUBDOCKER}"
