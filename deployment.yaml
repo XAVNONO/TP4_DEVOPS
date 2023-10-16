@@ -17,5 +17,5 @@ spec:                        # spécification du déploiement
         image: xavnono/python_app:latest    # Image Docker utilisée
         ports:
         - containerPort: 8900              # Port d'écoute du conteneur
-        imagePullSecrets:
-        - name: regcred
+      imagePullSecrets:
+      - name: regcred
