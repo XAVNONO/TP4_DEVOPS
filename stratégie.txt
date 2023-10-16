@@ -66,25 +66,27 @@ services:
 ###################################################################################################
 deployment.yaml
 '''
-apiVersion: apps/v1
+apiVersion: apps/v1            # Version API Kubernetes
 kind: Deployment
 metadata:
-  name: python_app_deployment
-spec:
-  replicas: 3
+  name: python-app-deployment    # Nom du déploiement
+spec:                        # spécification du déploiement
+  replicas: 3                    # Nombres de répliques du déploiement
   selector:
     matchLabels:
-      app: python_app
+      app: python-app            # Etiquettes et valeur qui doivent être associés aux PODs de ce déploiement
   template:
     metadata:
       labels:
-        app: python_app
-    spec:
+        app: python-app          # Etiquettes et valeur associés aux PODs générés
+    spec:                    # spécification du POD
+      imagePullSecrets:
+      - name: regcred        # Mes credentials pour le HubDocker
       containers:
-      - name: python_app
-        image: xavnono/python_app:latest
+      - name: python-app                    # Nom du conteneur
+        image: xavnono/python-app:latest    # Image Docker utilisée
         ports:
-        - containerPort: 8900
+        - containerPort: 8900              # Port d'écoute du conteneur
 '''
 ###################################################################################################
 
