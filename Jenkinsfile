@@ -51,7 +51,9 @@ pipeline {
             expression {params.ENVIRONMENT == 'prod'}
         }
           steps {
+              // Déploiement en réplica 3
               sh 'kubectl apply -f deployment.yaml'
+              // Vérification du succés du déploiement
               sh 'kubectl rollout status deployment/python_app_deployment'
           }
         }
