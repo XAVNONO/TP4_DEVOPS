@@ -16,4 +16,4 @@ spec:                        # spécification du déploiement
       - name: python_app                    # Nom du conteneur
         image: xavnono/python_app:latest    # Image Docker utilisée
         ports:
-        - containerPort: 8900              # Port s'écoute du conteneur
+        - containerPort: 8900              # Port d'écoute du conteneur
