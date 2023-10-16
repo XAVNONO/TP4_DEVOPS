@@ -66,7 +66,7 @@ pipeline {
               // Déploiement en réplica 3
               sh 'kubectl apply -f deployment.yaml'
               // Vérification du succés du déploiement
-              sh 'kubectl rollout status deployment/python_app_deployment'
+              sh 'kubectl rollout status deployment/python-app-deployment'
           }
         }
       }
