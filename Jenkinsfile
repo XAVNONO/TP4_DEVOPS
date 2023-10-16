@@ -52,11 +52,13 @@ pipeline {
             expression {params.ENVIRONMENT == 'prod'}
         }
           steps {
-              // création de secret
-              sh 'kubectl create secret docker-registry REGCRED --docker-server=${IMAGE_TAG} /'
-                '--docker-username=${DOCKER_HUB_USER} /'
-                '--docker-password=${DOCKER_HUB_PAT} /'
-                '--docker-email=${DOCKER_HUB_MAIL}'
+              // création de secret sur kubernetes
+              sh '''
+                  kubectl create secret docker-registry REGCRED --docker-server=${IMAGE_TAG} /
+                    --docker-username=${DOCKER_HUB_USER} /
+                    --docker-password=${DOCKER_HUB_PAT} /
+                    --docker-email=${DOCKER_HUB_MAIL}
+                 '''
               // Déploiement en réplica 3
               sh 'kubectl apply -f deployment.yaml'
               // Vérification du succés du déploiement
