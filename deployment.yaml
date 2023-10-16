@@ -12,10 +12,11 @@ spec:                        # spécification du déploiement
       labels:
         app: python_app          # Etiquettes et valeur associés aux PODs générés
     spec:                    # spécification du POD
+      imagePullSecrets:
+      - name: regcred        # Mes credentials pour le HubDocker
       containers:
       - name: python_app                    # Nom du conteneur
         image: xavnono/python_app:latest    # Image Docker utilisée
         ports:
         - containerPort: 8900              # Port d'écoute du conteneur
-      imagePullSecrets:
-      - name: regcred
+
