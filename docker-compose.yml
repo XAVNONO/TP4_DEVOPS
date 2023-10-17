@@ -8,4 +8,4 @@ services:
       - DOCKER_SCOUT_HUB_PASSWORD=${DOCKER_HUB_PAT}
     command: cves xavnono/python-app --exit-code --only-severity critical,high
 
-project: TP4
+project: tp4
