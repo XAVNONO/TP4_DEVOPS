@@ -4,8 +4,8 @@ services:
   scout-cli:
     image: docker/scout-cli
     environment:
-      - DOCKER_SCOUT_HUB_USER=xavnono
-      - DOCKER_SCOUT_HUB_PASSWORD=dckr_pat_4J2oyGlyWzsg8HafBxz4YnTOqhQ
+      - DOCKER_SCOUT_HUB_USER=${DOCKER_HUB_USER}
+      - DOCKER_SCOUT_HUB_PASSWORD=${DOCKER_HUB_PAT}
     command: cves xavnono/python-app --exit-code --only-severity critical,high
 
   # python_app:
