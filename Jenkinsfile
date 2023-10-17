@@ -33,7 +33,7 @@ pipeline {
           }
 
 //>>>>> TEST "Dans une VM => Docker compose pour test" <<<<<//        
-      stage('Test_Scout') {
+      stage('SCOUT_TEST') {
         when {
             expression {params.ENVIRONMENT == 'test'}
         }
@@ -48,7 +48,7 @@ pipeline {
           }
 
 //>>>>> PROD "Déploiement kubernetes" <<<<<//        
-      stage('Deploy_PROD') {
+      stage('DEPLOY_PROD') {
         when {
             expression {params.ENVIRONMENT == 'prod'}
         }
