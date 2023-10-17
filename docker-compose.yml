@@ -1,5 +1,5 @@
 version: '3'
-
+project_name: tp4
 services:
   scout-cli:
     image: docker/scout-cli
@@ -7,5 +7,3 @@ services:
       - DOCKER_SCOUT_HUB_USER=${DOCKER_HUB_USER}
       - DOCKER_SCOUT_HUB_PASSWORD=${DOCKER_HUB_PAT}
     command: cves xavnono/python-app --exit-code --only-severity critical,high
-
-project: tp4
