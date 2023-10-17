@@ -41,7 +41,7 @@ pipeline {
               // Lancement containeur Docker Scout
               sh 'docker-compose up'
               // Check état containeur "exited"
-              sh 'while [ "$(docker inspect -f "{{.State.Status}}" tp4_scout-cli_1)" != "exited" ]; do sleep 1; done'
+              sh 'while [ "$(docker inspect -f "{{.State.Status}}" scout-test)" != "exited" ]; do sleep 1; done'
               // Nettoyage containeur
               sh 'docker-compose down'
             }
