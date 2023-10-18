@@ -54,13 +54,13 @@ pipeline {
         }
           steps {
               // création de secret sur kubernetes
-              sh '''
-                  kubectl create secret docker-registry regcred \
-                    --docker-server=${DOCKER_REGISTRY} \
-                    --docker-username=${DOCKER_HUB_USER} \
-                    --docker-password=${DOCKER_HUB_PAT} \
-                    --docker-email=${DOCKER_HUB_MAIL}
-                 '''
+              // sh '''
+              //     kubectl create secret docker-registry regcred \
+              //       --docker-server=${DOCKER_REGISTRY} \
+              //       --docker-username=${DOCKER_HUB_USER} \
+              //       --docker-password=${DOCKER_HUB_PAT} \
+              //       --docker-email=${DOCKER_HUB_MAIL}
+              //    '''
               // Déploiement en réplica 3
               sh 'kubectl apply -f deployment.yaml'
               // Vérification du succés du déploiement
