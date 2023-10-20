@@ -37,9 +37,11 @@ pipeline {
         when {
             expression {params.ENVIRONMENT == 'test'}
         }
-          steps {
+          steps {              
               // Récupération du repository dans le container Jenkins
               git credentialsId: 'token-github' , url: 'https://github.com/xavnono/TP4_DEVOPS'
+            }
+          steps {
               // Lancement containeur Docker Scout
               sh 'docker-compose up'
               // Check état containeur "exited"
