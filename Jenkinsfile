@@ -46,7 +46,7 @@ pipeline {
       stage('SCOUT_TEST') {
           steps {
               // Positionnement dans le container jenkins
-              sh 'cd var/jenkins_home/workspace/TP4-DEVOPS'
+              sh 'cd /var/jenkins_home/workspace/TP4-DEVOPS'
               // Lancement containeur Docker Scout
               sh 'docker-compose up'
               // Check état containeur "exited"
