@@ -32,15 +32,18 @@ pipeline {
             }
           }
 
-//>>>>> TEST "Dans une VM => Docker compose pour test" <<<<<//        
-      stage('SCOUT_TEST') {
+//>>>>> TEST "Dans une VM => Docker compose pour test" <<<<<//     
+      stage('Clone_REPO') {
         when {
             expression {params.ENVIRONMENT == 'test'}
         }
+      
           steps {              
               // Récupération du repository dans le container Jenkins
               git credentialsId: 'token-github' , url: 'https://github.com/xavnono/TP4_DEVOPS'
             }
+          }
+      stage('SCOUT_TEST') {
           steps {
               // Lancement containeur Docker Scout
               sh 'docker-compose up'
