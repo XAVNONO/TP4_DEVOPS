@@ -24,7 +24,7 @@ pipeline {
               // Récupération de l'image applicative provenant de Hub Docker 
               sh 'docker pull ${IMAGE_TAG}'
               // Lancement du containeur applicatif
-              sh 'docker container run -d -p 8888:8000 --name python-app-dev ${IMAGE_TAG}'
+              sh 'docker container run -d -p 9999:8000 --name python-app-dev ${IMAGE_TAG}'
               // Check état containeur "exited"
               sh 'while [ "$(docker inspect -f "{{.State.Status}}" python-app-dev)" != "exited" ]; do sleep 1; done'
               // Nettoyage containeur
