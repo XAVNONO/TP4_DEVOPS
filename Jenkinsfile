@@ -39,7 +39,7 @@ pipeline {
         }
           steps {
               // Récupération du repository dans le container Jenkins
-              sh 'git clone https://github.com/xavnono/TP4_DEVOPS'
+              git credentialsId: 'token-github' , url: 'clone https://github.com/xavnono/TP4_DEVOPS'
               // Lancement containeur Docker Scout
               sh 'docker-compose up'
               // Check état containeur "exited"
