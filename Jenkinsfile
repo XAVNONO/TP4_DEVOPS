@@ -40,7 +40,7 @@ pipeline {
       
           steps {              
               // Récupération du repository dans le container Jenkins
-              git credentialsId: 'token-github' , url: 'https://github.com/xavnono/TP4_DEVOPS'
+              git credentialsId: 'token-github' , url: 'https://github.com/XAVNONO/TP4_DEVOPS.git'
             }
           }
       stage('SCOUT_TEST') {
