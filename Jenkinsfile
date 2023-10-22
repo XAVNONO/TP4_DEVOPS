@@ -62,7 +62,7 @@ pipeline {
           }
 
 //>>>>> PROD "Déploiement kubernetes" <<<<<//        
-      stage('Clone_REPO') {
+      stage('Clone_REPO_DEPLOY') {
         when {
             expression {params.ENVIRONMENT == 'prod'}
         }
