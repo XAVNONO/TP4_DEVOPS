@@ -43,7 +43,12 @@ pipeline {
               git credentialsId: 'token-github' , url: 'https://github.com/XAVNONO/TP4_DEVOPS.git'
             }
           }
+          
       stage('SCOUT_TEST') {
+        when {
+            expression {params.ENVIRONMENT == 'test'}
+        }
+
           steps {
               // Positionnement dans le container jenkins
               sh 'cd /var/jenkins_home/workspace/TP4-DEVOPS'
