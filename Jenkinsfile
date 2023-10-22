@@ -16,11 +16,10 @@ pipeline {
   stages {
 
 //>>>>> DEV "Dans une VM sur le cloud => simple docker run" <<<<<//
-    when {
-      expression {params.ENVIRONMENT == 'dev'}
-        }
-
       stage('RUN_DEV') {
+        when {
+          expression {params.ENVIRONMENT == 'dev'}
+            }
           steps {
               // Récupération de l'image applicative provenant de Hub Docker 
               sh 'docker pull ${IMAGE_TAG}'
