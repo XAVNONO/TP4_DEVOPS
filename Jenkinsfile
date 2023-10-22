@@ -43,7 +43,7 @@ pipeline {
               git credentialsId: 'token-github' , url: 'https://github.com/XAVNONO/TP4_DEVOPS.git'
             }
           }
-          
+
       stage('SCOUT_TEST') {
         when {
             expression {params.ENVIRONMENT == 'test'}
@@ -62,6 +62,17 @@ pipeline {
           }
 
 //>>>>> PROD "Déploiement kubernetes" <<<<<//        
+            stage('Clone_REPO') {
+        when {
+            expression {params.ENVIRONMENT == 'prod'}
+        }
+      
+          steps {              
+              // Récupération du repository dans le container Jenkins
+              git credentialsId: 'token-github' , url: 'https://github.com/XAVNONO/TP4_DEVOPS.git'
+            }
+          }
+      
       stage('DEPLOY_PROD') {
         when {
             expression {params.ENVIRONMENT == 'prod'}
