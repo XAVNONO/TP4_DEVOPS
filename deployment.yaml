@@ -1,22 +1,24 @@
 apiVersion: apps/v1            # Version API Kubernetes
 kind: Deployment
 metadata:
-  name: python-app-deployment    # Nom du déploiement
-spec:                        # spécification du déploiement
-  replicas: 3                    # Nombres de répliques du déploiement
+  name: python-app-deployment    # Nom du déploiement Kubernetes qui va être créé dans le cluster
+  labels:
+    app: python-app
+spec:                             # spécifications CLUSTER
+  replicas: 2                     # Nombres de pods à créer dans le cluster Kubernetes pour l'application python-app container
   selector:
     matchLabels:
-      app: python-app            # Etiquettes et valeur qui doivent être associés aux PODs de ce déploiement
+      app: python-app             # Etiquettes et valeur qui doivent être associés aux PODs de ce déploiement
   template:
     metadata:
       labels:
-        app: python-app          # Etiquettes et valeur associés aux PODs générés
-    spec:                    # spécification du POD
+        app: python-app           # Etiquettes et valeur associés aux PODs générés
+    spec:                         # spécifications du POD
       imagePullSecrets:
-      - name: regcred        # Mes credentials pour le HubDocker
+      - name: regcred             # Mes credentials pour le HubDocker
       containers:
-      - name: python-app                    # Nom du conteneur
-        image: xavnono/python-app:latest    # Image Docker utilisée
+      - name: python-app                      # Nom du conteneur
+        image: xavnono/python-app:latest      # Image Docker utilisée pour build l'application python-app container
         ports:
-        - containerPort: 8900              # Port d'écoute du conteneur
+        - containerPort: 8900                 # Port d'écoute du conteneur
 
