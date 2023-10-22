@@ -33,7 +33,7 @@ pipeline {
       }
 
 //>>>>> TEST "Dans une VM => Docker compose pour test" <<<<<//     
-      stage('Clone_REPO') {
+      stage('Clone_REPO_TEST') {
         when {
             expression {params.ENVIRONMENT == 'test'}
         }
@@ -73,14 +73,20 @@ pipeline {
             }
           }
       
+      stage('START_KUBE')
+        when {
+            expression {params.ENVIRONMENT == 'prod'}
+        }
+          steps {
+              sh 'minikube start --driver=docker --force'
+          }
+
       stage('DEPLOY_PROD') {
         when {
             expression {params.ENVIRONMENT == 'prod'}
         }
           steps {
-
-
-                          // création de secret sur kubernetes
+              // création de secret sur kubernetes
               sh '''
                   kubectl create secret docker-registry regcred \
                     --docker-server=${DOCKER_REGISTRY} \
@@ -92,13 +98,11 @@ pipeline {
                 kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
               }
 
-
-
               // Déploiement en réplica 3
               // sh 'kubectl apply -f deployment.yaml'
               // // Vérification du succés du déploiement
               // sh 'kubectl rollout status deployment/python-app-deployment'
           }
-        }
       }
-    }
+  }
+}
