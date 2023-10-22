@@ -16,10 +16,11 @@ pipeline {
   stages {
 
 //>>>>> DEV "Dans une VM sur le cloud => simple docker run" <<<<<//
-      stage('RUN_DEV') {
-        when {
-            expression {params.ENVIRONMENT == 'dev'}
+    when {
+      expression {params.ENVIRONMENT == 'dev'}
         }
+
+      stage('RUN_DEV') {
           steps {
               // Récupération de l'image applicative provenant de Hub Docker 
               sh 'docker pull ${IMAGE_TAG}'
@@ -78,19 +79,22 @@ pipeline {
             expression {params.ENVIRONMENT == 'prod'}
         }
           steps {
+
+
+                          // création de secret sur kubernetes
+              sh '''
+                  kubectl create secret docker-registry regcred \
+                    --docker-server=${DOCKER_REGISTRY} \
+                    --docker-username=${DOCKER_HUB_USER} \
+                    --docker-password=${DOCKER_HUB_PAT} \
+                    --docker-email=${DOCKER_HUB_MAIL}
+                 '''
               script {
                 kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
               }
 
 
-              // création de secret sur kubernetes
-              // sh '''
-              //     kubectl create secret docker-registry regcred \
-              //       --docker-server=${DOCKER_REGISTRY} \
-              //       --docker-username=${DOCKER_HUB_USER} \
-              //       --docker-password=${DOCKER_HUB_PAT} \
-              //       --docker-email=${DOCKER_HUB_MAIL}
-              //    '''
+
               // Déploiement en réplica 3
               // sh 'kubectl apply -f deployment.yaml'
               // // Vérification du succés du déploiement
