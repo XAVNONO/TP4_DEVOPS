@@ -19,7 +19,7 @@ pipeline {
       stage('RUN_DEV') {
         when {
           expression {params.ENVIRONMENT == 'dev'}
-            }
+        }
           steps {
               // Récupération de l'image applicative provenant de Hub Docker 
               sh 'docker pull ${IMAGE_TAG}'
@@ -29,8 +29,8 @@ pipeline {
               sh 'while [ "$(docker inspect -f "{{.State.Status}}" python-app-dev)" != "exited" ]; do sleep 1; done'
               // Nettoyage containeur
               sh 'docker rm python-app-dev'
-            }
           }
+      }
 
 //>>>>> TEST "Dans une VM => Docker compose pour test" <<<<<//     
       stage('Clone_REPO') {
@@ -41,8 +41,8 @@ pipeline {
           steps {              
               // Récupération du repository dans le container Jenkins
               git credentialsId: 'token-github' , url: 'https://github.com/XAVNONO/TP4_DEVOPS.git'
-            }
           }
+      }
 
       stage('SCOUT_TEST') {
         when {
@@ -58,8 +58,8 @@ pipeline {
               sh 'while [ "$(docker inspect -f "{{.State.Status}}" scout-test)" != "exited" ]; do sleep 1; done'
               // Nettoyage containeur
               sh 'docker-compose down'
-            }
           }
+      }
 
 //>>>>> PROD "Déploiement kubernetes" <<<<<//        
       stage('Clone_REPO_DEPLOY') {
