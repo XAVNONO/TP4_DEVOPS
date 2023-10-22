@@ -62,6 +62,11 @@ pipeline {
             expression {params.ENVIRONMENT == 'prod'}
         }
           steps {
+              script {
+                kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+              }
+
+
               // création de secret sur kubernetes
               // sh '''
               //     kubectl create secret docker-registry regcred \
@@ -71,9 +76,9 @@ pipeline {
               //       --docker-email=${DOCKER_HUB_MAIL}
               //    '''
               // Déploiement en réplica 3
-              sh 'kubectl apply -f deployment.yaml'
-              // Vérification du succés du déploiement
-              sh 'kubectl rollout status deployment/python-app-deployment'
+              // sh 'kubectl apply -f deployment.yaml'
+              // // Vérification du succés du déploiement
+              // sh 'kubectl rollout status deployment/python-app-deployment'
           }
         }
       }
