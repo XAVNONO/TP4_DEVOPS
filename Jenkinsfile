@@ -96,13 +96,11 @@ pipeline {
                     --docker-email=${DOCKER_HUB_MAIL}
                  '''
               script {
-                kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
-              }
-
               // Déploiement en réplica 3
-              // sh 'kubectl apply -f deployment.yaml'
+              sh 'kubectl apply -f deployment.yaml'
               // // Vérification du succés du déploiement
-              // sh 'kubectl rollout status deployment/python-app-deployment'
+              sh 'kubectl rollout status deployment/python-app-deployment'
+              }
           }
       }
   }
