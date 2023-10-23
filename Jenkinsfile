@@ -73,7 +73,7 @@ pipeline {
             }
           }
       
-      stage('START_KUBE') {
+      stage('MINIKUBE') {
         when {
             expression {params.ENVIRONMENT == 'prod'}
         }
