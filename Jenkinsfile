@@ -73,13 +73,14 @@ pipeline {
             }
           }
       
-      stage('MINIKUBE') {
+      stage('MINIKUBE_start') {
         when {
             expression {params.ENVIRONMENT == 'prod'}
         }
           steps {
               sh 'minikube start --driver=docker --force'
           }
+      }
 
       stage('DEPLOY_PROD') {
         when {
